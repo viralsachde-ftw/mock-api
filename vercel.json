@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "functions": { "api/**/*.js": { "runtime": "nodejs20.x" } },
   "routes": [
-    { "src": "/api/data/latest", "dest": "/api/data/latest.js" },
-    { "src": "/api/data", "dest": "/api/data.js" }
+    {
+      "src": "/api/data/latest",
+      "dest": "/api/data/latest.js"
+    },
+    {
+      "src": "/api/data",
+      "dest": "/api/data.js"
+    }
   ]
 }
