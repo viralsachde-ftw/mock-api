@@ -1,25 +1,18 @@
-import { generateVesselCall, generateManifest, generateBlItem } from '../../lib/fakers.js';
+import { getOrInitState, manifestWithLatest } from '../../lib/state.js';
 
 export default function handler(req, res) {
   if (req.method !== 'GET') return res.status(405).json({ error: 'Method Not Allowed' });
 
-  const baseManifest = generateManifest(5);
-  const mrn = baseManifest.message_info.Vessel.Mrn;
-
-  // 5 new BL items prepended (newest first, CRN index offset 200+)
-  const latestBlItems = Array.from({ length: 5 }, (_, i) => generateBlItem(mrn, 200 + i));
+  const state = getOrInitState();
 
   res.status(200).json({
-    vesselCall: {
-      latest: Array.from({ length: 5 }, () => generateVesselCall()),
-      current: generateVesselCall(),
-    },
-    manifest: {
-      ...baseManifest,
-      message_info: {
-        ...baseManifest.message_info,
-        BlList: [...latestBlItems, ...baseManifest.message_info.BlList],
-      },
+    vesselCall: state.vesselCall,
+    manifest: manifestWithLatest(state),
+    meta: {
+      base_bl_count: state.manifest.message_info.BlList.length,
+      latest_bl_count: state.latestBlItems.length,
+      total_bl_count: state.latestBlItems.length + state.manifest.message_info.BlList.length,
+      next_crn_index: state.nextCrnIndex,
     },
   });
 }

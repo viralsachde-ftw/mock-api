@@ -1,13 +1,13 @@
 {
   "version": 2,
   "routes": [
-    {
-      "src": "/api/data/latest",
-      "dest": "/api/data/latest.js"
-    },
-    {
-      "src": "/api/data",
-      "dest": "/api/data.js"
-    }
+    { "src": "/api/data/latest",        "dest": "/api/data/latest.js" },
+    { "src": "/api/data",               "dest": "/api/data.js" },
+    { "src": "/api/vessel-call",        "dest": "/api/vessel-call.js" },
+    { "src": "/api/manifest",           "dest": "/api/manifest.js" },
+    { "src": "/api/cro",                "dest": "/api/cro.js" },
+    { "src": "/api/latest/add",         "dest": "/api/latest/add.js" },
+    { "src": "/api/state/reset",        "dest": "/api/state/reset.js" },
+    { "src": "/webhooks/tancis/status", "dest": "/api/webhooks/tancis/status.js" }
   ]
 }
